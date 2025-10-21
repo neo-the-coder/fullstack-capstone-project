@@ -23,5 +23,5 @@ async function connectToDatabase() {
         
 dbNamedbNamedbInstance        // Task 3: Return database instance
     tch (err) {
-    consoledbInstancerror(err);
+    consoledbInstance;ror(err);
 module.exports = connectToDatabase;
