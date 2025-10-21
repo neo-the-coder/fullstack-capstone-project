@@ -20,8 +20,10 @@ async function connectToDatabase() {
     console.log("Connected successfully to server");
 
     // Task 2: Connect to database giftDB and store in variable dbInstance
-        
-dbNamedbNamedbInstance        // Task 3: Return database instance
-    tch (err) {
-    consoledbInstance;ror(err);
+    const dbInstance = client.db(dbName);
+    
+    // Task 3: Return database instance
+    return dbInstance;
+}
+
 module.exports = connectToDatabase;
