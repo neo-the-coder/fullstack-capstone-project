@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
         // Add the name filter to the query if the name parameter is not empty
         if (req.query.name && req.query.name.trim() !== '') {
             query.name = { $regex: req.query.name, $options: "i" }; // Using regex for partial match, case-insensitive
-        // }
+        }
 
         // Task 3: Add other filters to the query
         if (req.query.category) {
@@ -24,7 +24,6 @@ router.get('/', async (req, res, next) => {
         }
         if (req.query.condition) {
             query.condition = req.query.condition;
-
         }
         if (req.query.age_years) {
             query.age_years = { $lte: parseInt(req.query.age_years) };
