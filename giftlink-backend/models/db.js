@@ -21,7 +21,7 @@ async function connectToDatabase() {
 
     // Task 2: Connect to database giftDB and store in variable dbInstance
         
-dbInstance        // Task 3: Return database instance
+dbNamedbNamedbInstance        // Task 3: Return database instance
     tch (err) {
     consoledbInstancerror(err);
 module.exports = connectToDatabase;
