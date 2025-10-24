@@ -22,7 +22,7 @@ function SearchPage() {
           throw new Error(`HTTP error; ${response.status}`);
         }
         const data = await response.json();
-        setSearchResults(data);
+        setSearchResults(data.gifts);
       } catch (error) {
         console.log("Fetch error: " + error.message);
       }
@@ -48,7 +48,7 @@ function SearchPage() {
         throw new Error(`Search failed; ${response.status}`);
       }
       const data = await response.json();
-      setSearchResults(data);
+      setSearchResults(data.gifts);
     } catch (error) {
       console.log("Fetch error: " + error.message);
     }
