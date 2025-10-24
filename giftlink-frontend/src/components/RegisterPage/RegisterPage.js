@@ -1,14 +1,51 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
+import {urlConfig} from '../../config'
+import { useAppContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 function RegisterPage() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleRegister = () => {
-        console.log('Registered')
+    const navigate = useNavigate();
+    const {setIsLoggedIn} = useAppContext();
+
+    const handleRegister = async () => {
+        try{
+            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                })
+           })
+
+           const json = await response.json();
+
+           if (json.authtoken) {
+            sessionStorage.setItem('auth-token', json.authtoken);
+            sessionStorage.setItem('name', json.firstName);
+            sessionStorage.setItem('email', json.email);
+            setIsLoggedIn(true);
+            navigate('/app');
+           }
+
+           if (json.error) {
+            setError(json.error)
+           }
+
+            }catch (e) {
+              console.log("Error fetching details: " + e.message);
+          }
     }
 
     return (
@@ -32,6 +69,7 @@ function RegisterPage() {
 
                             <button className="btn btn-primary w-100 mb-3" type="submit">Register</button>
                         </form>
+                        <div className='text-danger'>{error}</div>
                 {/* insert code here to create a button that performs the `handleRegister` function on click */}
                     <p className="mt-4 text-center">
                         Already a member? <a href="/app/login" className="text-primary">Login</a>
