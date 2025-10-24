@@ -104,4 +104,55 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// {Insert it along with other imports} Task 1: Use the `body`,`validationResult` from `express-validator` for input validation
+
+router.put('/update', async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        logger.error('Validation errors in update request', errors.array());
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const email = req.headers.email;
+
+        if (!email) {
+            logger.error('Email not found in the request headers');
+            return res.status(400).json({ error: "Email not found in the request headers" });
+        }
+
+        const db = await connectToDatabase('giftsdb')
+        const collection = await db.collection('users');
+        const existingUser = await collection.findOne({ email })
+
+        if (!existingUser) {
+            logger.error('User not found');
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        existingUser.updatedAt = new Date();
+
+        const updatedUser = await collection.findOneAndUpdate(
+            { email },
+            { $set: existingUser },
+            { returnDocument: 'after' }
+        );
+
+        const payload = {
+            user: {
+                id: updatedUser._id.toString()
+            }
+        }
+
+        const authtoken = jwt.sign(payload, JWT_SECRET)
+        logger.info('User updated successfully');
+
+        res.json({authtoken});
+    } catch (e) {
+        logger.error(error);
+        return res.status(500).send('Internal server error');
+
+    }
+});
+
 module.exports = router;
