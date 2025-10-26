@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
+        className="navbar navbar-expand-lg navbar-light bg-light px-4"
         id="navbar_container"
       >
         <a className="navbar-brand" href={`${urlConfig.backendUrl}/app`}>

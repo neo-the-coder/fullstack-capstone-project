@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./SearchPage.css";
 import { urlConfig } from "../../config";
 
 function SearchPage() {
@@ -64,7 +65,7 @@ function SearchPage() {
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-12 col-lg-8">
           <div className="filter-section mb-3 p-3 border rounded">
             <h5>Filters</h5>
             <div className="d-flex flex-column">
@@ -111,7 +112,7 @@ function SearchPage() {
             />
 
             {/* Task 8: Implement search button with onClick event to trigger search:*/}
-            <button onClick={handleSearch} className="search-button">
+            <button onClick={handleSearch} className="btn search-button">
               Search
             </button>
           </div>

@@ -53,7 +53,7 @@ function RegisterPage() {
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
-        <div className="col-md-6 col-lg-4">
+        <div className="col-md-12 col-lg-8">
           <div className="register-card p-4 border rounded">
             <h2 className="text-center mb-4 font-weight-bold">Register</h2>
             <form onSubmit={handleRegister}>
@@ -101,7 +101,7 @@ function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <button className="btn btn-primary w-100 mb-3" type="submit">
+              <button className="btn btn-primary w-100 mb-3 mt-4" type="submit">
                 Register
               </button>
             </form>
