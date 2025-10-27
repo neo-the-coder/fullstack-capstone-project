@@ -96,7 +96,7 @@ function RegisterPage() {
               <input
                 className="form-control"
                 id="password"
-                type="text"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
